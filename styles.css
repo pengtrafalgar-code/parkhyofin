@@ -4,9 +4,11 @@
 }
 
 body {
-  margin: 40px 0;
+  margin: 0;
   padding: 0;
   overflow-x: hidden; /* 가로 스크롤 방지 */
+  padding-bottom: 40px;
+  padding-top: 20px
 }
 
 img {
@@ -26,4 +28,5 @@ img {
   button { font-size: 16px !important; }
 
 }
+
 
