@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>공론장을 찾아서 — 의사의 방 (힌트)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <!-- 공통 CSS 파일 연결 -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* --- 기본 스타일(이전과 동일 톤) --- */
+    html, body { height:100%; margin:0; }
+    body{
+      height:100vh;
+      background: linear-gradient(to bottom, #0a0a0f, #1a1a2e);
+      color: #e0e0e0;
+      font-family: "Cinzel", serif;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      overflow:hidden; /* 스크롤 제거 */
+      position:relative;
+    }
+
+    /* 안개(fog) 효과 (동일 리소스 사용) */
+    body::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: url("배경.png") repeat;
+      opacity:0.20;
+      z-index:0;
+      animation: fogMove 60s linear infinite;
+    }
+    @keyframes fogMove { from{background-position:0 0;} to{background-position:2000px 0;} }
+
+    /* 컨테이너 (안개 위에 표시) */
+    .wrap{
+      width:100%;
+      max-width:1100px;
+      z-index:1;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+      padding:12px;
+      box-sizing:border-box;
+    }
+
+    /* 공통 이미지 스타일 (가로는 컨테이너 기준으로 맞추고 높이는 제한) */
+    .image {
+      width: 72%;
+      max-width: 820px;
+      height: auto;
+      display:block;
+      margin: 0 auto;
+    }
+
+    /* --- 의사의 말: '효과 없음' --- */
+    .speech-img {
+      /* 효과(그림자/후광) 제거 — 깔끔한 이미지로 보이게 */
+      box-shadow: none;
+      border-radius: 6px;
+      object-fit: contain;
+      /* 화면에 너무 크지 않도록 높이 제한 (스크롤 방지) */
+      max-height: 28vh;
+    }
+
+    /* --- 의사의 방: 후광(기존 효과 유지) --- */
+    .room-wrap {
+      position: relative;
+      width: 72%;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .room-img {
+      width:100%;
+      height:auto;
+      max-height: 48vh; /* 화면에 맞게 높이 제한 */
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 0 20px #6a0dad, 0 0 40px #9d4edd; /* 보라빛 후광 유지 */
+      display:block;
+    }
+
+    /* 정답 확인 버튼 (이전과 동일한 보라 버튼 스타일, 약간 크게) */
+    .check-btn{
+      background: #6a0dad;
+      color: #fff;
+      padding: 14px 24px;
+      font-size: 23px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #6a0dad, 0 0 20px #3c096c;
+      transition: 0.25s;
+      width: 200px;
+      z-index: 1;
+      margin-top: 20px;
+    }
+    .check-btn:hover{
+      background: #9d4edd;
+      box-shadow: 0 0 15px #9d4edd, 0 0 30px #c77dff;
+    }
+
+    /* Hotspot (투명 클릭영역). 퍼센트 좌표로 반응형 대응 */
+    .hotspot {
+      position: absolute;
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      z-index: 2;
+      background: transparent; /* 완전 투명(디버그 시 rgba로 바꿔서 위치 확인 가능) */
+      transition: transform .12s;
+      display:inline-block;
+    }
+    .hotspot:hover { transform: translate(-50%,-50%) scale(1.08); box-shadow: 0 0 12px rgba(154,65,255,0.16); }
+
+    /* 반응형: 화면 작아지면 hotspot, 버튼 크기 줄임 */
+    @media (max-width: 900px){
+      .hotspot { width:56px; height:56px; }
+      .check-btn { width:170px; padding:12px 20px; font-size:16px; }
+      .speech-img { max-height: 22vh; }
+      .room-img { max-height: 50vh; }
+    }
+
+    /* === 힌트 모달 관련 === */
+    #hintModal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    #hintImage {
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.5);
+      cursor: pointer; /* 이미지를 클릭하면 닫히므로 포인터로 표시 */
+    }
+
+    /* 되돌아가기(닫기) 버튼 — 투명 (원하면 위치 조정) */
+    #closeHint {
+      position: absolute;
+      width: 72px;
+      height: 72px;
+      border: none;
+      background: transparent; /* 투명 */
+      cursor: pointer;
+      top: 10%;
+      right: 10%;
+      z-index: 1001;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- 1) 의사의 말 (효과 없음) -->
+    <img src="의사의 말.png" alt="의사의 말" class="image speech-img">
+
+    <!-- 2) 의사의 방 (후광 유지) + hotspots -->
+    <div class="room-wrap" aria-label="의사의 방 이미지 — 숫자 영역을 눌러 힌트를 확인하세요.">
+      <img src="의사의 방.png" alt="의사의 방" class="room-img">
+
+      <!-- hotspots: href="#" + onclick(...); return false 로 페이지 이동 방지 -->
+      <a class="hotspot" href="#" onclick="showHint('의사의 방 힌트 1.png'); return false;"
+         style="left: 8.5%; top: 30.4%;" title="모니터" aria-label="힌트 1"></a>
+
+      <a class="hotspot" href="#" onclick="showHint('의사의 방 힌트 2.png'); return false;"
+         style="left: 56.8%; top: 69.0%;" title="수첩" aria-label="힌트 2"></a>
+
+      <a class="hotspot" href="#" onclick="showHint('의사의 방 힌트 3.png'); return false;"
+         style="left: 80.5%; top: 42.2%;" title="의사 가운" aria-label="힌트 3"></a>
+
+      <a class="hotspot" href="#" onclick="showHint('의사의 방 힌트 4.png'); return false;"
+         style="left: 49.0%; top: 22.8%;" title="내과학개론" aria-label="힌트 4"></a>
+    </div>
+
+    <!-- 3) 정답 확인 버튼 (이전 스타일 유지, 큼직하게) -->
+    <button class="check-btn" onclick="location.href='page4-1-2.html'">정답 확인</button>
+  </div>
+
+  <!-- 힌트 모달 (이미지 클릭으로 닫힘) -->
+  <div id="hintModal" aria-hidden="true">
+    <img id="hintImage" src="" alt="힌트 그림">
+    <!-- 투명 닫기 버튼(원하면 위치 조정) -->
+    <button id="closeHint" aria-label="힌트 닫기"></button>
+  </div>
+
+  <script>
+    function showHint(imgSrc){
+      const modal = document.getElementById('hintModal');
+      const img = document.getElementById('hintImage');
+
+      // 이미지 파일이름(경로)이 정확한지 확인하세요.
+      img.src = imgSrc;
+      modal.style.display = 'flex';
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    // 이미지 클릭하면 닫기
+    document.getElementById('hintImage').addEventListener('click', function(){
+      const modal = document.getElementById('hintModal');
+      this.src = ''; // 메모리 해제(선택)
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+    });
+
+    // 투명 닫기 버튼도 닫기 동작 (있어도 되고 없어도 됩니다)
+    document.getElementById('closeHint').addEventListener('click', function(e){
+      const modal = document.getElementById('hintModal');
+      document.getElementById('hintImage').src = '';
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+      e.stopPropagation();
+    });
+
+    // (선택) ESC 키로 닫기
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape'){
+        const modal = document.getElementById('hintModal');
+        if(modal.style.display === 'flex'){
+          document.getElementById('hintImage').src = '';
+          modal.style.display = 'none';
+          modal.setAttribute('aria-hidden', 'true');
+        }
+      }
+    });
+  </script>
+</body>
+</html>

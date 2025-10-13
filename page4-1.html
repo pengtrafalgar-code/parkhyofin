@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>공론장을 찾아서 - Page 4-1</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <!-- 공통 CSS 파일 연결 -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom, #0a0a0f, #1a1a2e);
+      color: #e0e0e0;
+      font-family: "Cinzel", serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* 세로 중앙 */
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden; /* 스크롤 제거 */
+    }
+
+    /* 안개 효과 */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("배경.png") repeat;
+      opacity: 0.2;
+      animation: fogMove 60s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes fogMove {
+      from { background-position: 0 0; }
+      to { background-position: 2000px 0; }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px; /* 요소 간 간격 줄임 */
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+      color: #ccc;
+      margin: 5px 0; /* 기본 간격 줄임 */
+    }
+
+    .doctor-quote {
+      font-family: "Georgia", serif;
+      font-style: italic;
+      color: #d0a6ff;
+      font-size: 17px;
+      margin: 10px 0; /* 위아래 간격 줄임 */
+    }
+
+    .highlight {
+      font-weight: bold;
+      text-shadow: 0 0 1px #fff, 0 0 10px #fff;
+    }
+
+    /* 이미지 */
+    .image-block img {
+      width: 300px;
+      height: auto;
+      object-fit: cover;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #6a0dad, 0 0 40px #9d4edd; /* 보라빛 테두리 효과 */
+    }
+
+    /* 버튼 (동그란 형태, 작게) */
+    .btn {
+      background: #6a0dad;
+      color: #fff;
+      padding: 10px 18px;
+      font-size: 16px;
+      border: none;
+      border-radius: 50px; /* 동그랗게 */
+      cursor: pointer;
+      box-shadow: 0 0 8px #6a0dad, 0 0 16px #3c096c;
+      transition: 0.3s;
+      width: 140px;
+      margin-top: 8px; /* 버튼 위쪽 간격 줄임 */
+    }
+
+    .btn:hover {
+      background: #9d4edd;
+      box-shadow: 0 0 12px #9d4edd, 0 0 24px #c77dff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 이미지 -->
+    <div class="image-block">
+      <img src="의사.jpg" alt="의사">
+    </div>
+
+    <!-- 내용 -->
+    <p>
+      목의 통증으로 병원을 찾은 당신. 의사는 다음과 같이 진단을 내렸다.
+    </p>
+    <p class="doctor-quote">
+      “환자분은 현재 GERD(Gastroesophageal Reflux Disease)가 진행되어서, 
+      바렛식도(Barrett’s Esophagus)로 이행될 가능성이 있습니다. 
+      조직검사 결과 이형성(dysplasia) 소견이 있어서, 
+      향후 adenocarcinoma으로 발전할 리스크가 있습니다.”
+    </p>
+    <p>
+      의사는 대체 뭐라고 말하는 걸까? 방 안을 조사하여 힌트를 찾아보자.
+    </p>
+
+    <!-- 버튼 -->
+    <button class="btn" onclick="location.href='page4-1-1.html'">조사하기</button>
+  </div>
+</body>
+</html>

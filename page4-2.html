@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>공론장을 찾아서 - Page 2</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <!-- 공통 CSS 파일 연결 -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh; /* 화면 높이에 맞춤 */
+      background: linear-gradient(to bottom, #0a0a0f, #1a1a2e);
+      color: #e0e0e0;
+      font-family: "Cinzel", serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* 세로 가운데 정렬 */
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding: 20px;
+      overflow: hidden; /* 스크롤 제거 */
+    }
+
+    img {
+      max-width: 25%; /* 이미지 크기 유지 */
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px #6a0dad, 0 0 30px #3c096c;
+      position: relative;
+      z-index: 1;
+    }
+
+    p {
+      max-width: 600px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #ccc;
+      margin: 5px 0 15px 0; /* 위·아래 여백 줄임 */
+      position: relative;
+      z-index: 1;
+    }
+
+    button {
+      background: #6a0dad;
+      color: #fff;
+      padding: 10px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-top: 5px; /* 버튼 위 여백 줄임 */
+      box-shadow: 0 0 15px #6a0dad, 0 0 30px #3c096c;
+      transition: 0.3s;
+      position: relative;
+      z-index: 1;
+    }
+    button:hover {
+      background: #9d4edd;
+      box-shadow: 0 0 20px #9d4edd, 0 0 40px #c77dff;
+    }
+
+    /* 안개 효과 */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("배경.png") repeat;
+      opacity: 0.2;
+      animation: fogMove 60s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes fogMove {
+      from { background-position: 0 0; }
+      to { background-position: 2000px 0; }
+    }
+  </style>
+</head>
+<body>
+  <img src="뉴스 보는 사람.png" alt="뉴스 보는 사람 이미지">
+
+  <p>
+    아침 뉴스를 보는 당신.<br>
+    "흥미로운 뉴스가 참 많네."<br>
+    잠깐, 그런데 뉴스가 뭔가 이상하네?<br>
+    이 뉴스는 <b style="text-shadow: 0 0 1px #fff, 0 0 10px #fff;">진짜일까, 가짜일까?<br>
+  </p>
+
+  <button onclick="goNext()">뉴스보기</button>
+
+  <script>
+    function goNext() {
+      window.location.href = "page4-2-1.html";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>공론장을 찾아서 - Page 4-2-2</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <!-- 공통 CSS 파일 연결 -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(to bottom, #0a0a0f, #1a1a2e);
+  color: #e0e0e0;
+  font-family: "Cinzel", serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 5px 20px;
+}
+
+/* 안개 효과 */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("배경.png") repeat;
+  opacity: 0.2;
+  animation: fogMove 60s linear infinite;
+  z-index: 0;
+}
+
+@keyframes fogMove {
+  from { background-position: 0 0; }
+  to { background-position: 2000px 0; }
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  width: 100%;
+}
+
+p {
+  font-size: 24px;
+  color: #ccc;
+  margin-bottom: 12px;
+}
+
+.highlight {
+  font-weight: bold;
+  text-shadow: 0 0 2px #fff, 0 0 12px #fff;
+}
+
+img {
+  max-width: 75%;
+  height: auto;
+  margin: 12px 0;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #6a0dad, 0 0 30px #3c096c;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 600px;
+  margin: 14px auto 0 auto;
+}
+
+/* 버튼 스타일 — 이전 코드(page4-1)와 완전 통일 */
+.choice-btn {
+  background: #6a0dad;
+  color: #fff;
+  padding: 12px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #6a0dad, 0 0 20px #3c096c;
+  transition: 0.25s;
+  width: 100%;
+}
+
+.choice-btn:hover {
+  background: #9d4edd;
+  box-shadow: 0 0 15px #9d4edd, 0 0 30px #c77dff;
+}
+
+/* 반응형 */
+@media (max-width: 900px) {
+  p { font-size: 20px; margin-bottom: 10px; }
+  img { max-width: 80%; margin: 10px 0; }
+  .options { gap: 12px; margin-top: 10px; }
+  .choice-btn { font-size: 16px; padding: 10px 18px; border-radius: 40px; }
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p>그렇다면 이 뉴스는 왜 <span class="highlight">가짜 뉴스</span>일까?</p>
+
+    <img src="불화설 기사2.png" alt="불화설 기사">
+
+    <div class="options">
+      <button class="choice-btn" onclick="location.href='page4-2-fail.html'">1. 기사의 제목과 내용이 다르다.</button>
+      <button class="choice-btn" onclick="location.href='page4-2-fail.html'">2. 불분명하거나 공신력 없는 기관의 출처이다.</button>
+      <button class="choice-btn" onclick="location.href='page4-2-fail.html'">3. 실제보다 내용이 지나치게 과장되어 있다.</button>
+      <button class="choice-btn" onclick="location.href='page4-2-pass.html'">4. 정당하지 않은 근거로 추론하는 음모론이다.</button>
+    </div>
+  </div>
+</body>
+</html>

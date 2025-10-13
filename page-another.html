@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>공론장을 찾아서 - Another Ending</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <!-- 공통 CSS 파일 연결 -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(to bottom, #0a0a0f, #1a1a2e);
+      color: #e0e0e0;
+      font-family: "Cinzel", serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding: 40px 20px;
+      overflow-x: hidden;
+    }
+    
+    h1 {
+      font-size: 42px;
+      margin: 0 0 40px 0;
+      text-shadow: 0 0 15px #fff;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* 엔딩 그리드 */
+    .endings-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      max-width: 1000px;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .ending-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      cursor: pointer;
+    }
+    
+    .ending-item img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(106, 13, 173, 0.6), 0 0 40px rgba(60, 9, 108, 0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .ending-item:hover img {
+      transform: scale(1.02);
+      box-shadow: 0 0 25px rgba(157, 78, 221, 0.8), 0 0 50px rgba(199, 125, 255, 0.5);
+    }
+    
+    /* 엔딩 제목 */
+    .ending-title {
+      color: #fff;
+      font-size: 22px;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(157, 78, 221, 0.6);
+      transition: text-shadow 0.3s;
+    }
+    
+    .ending-item:hover .ending-title {
+      text-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 30px rgba(199, 125, 255, 0.9);
+    }
+    
+    /* 시간 되돌리기 버튼 */
+    .reset-btn {
+      background: linear-gradient(135deg, #3c096c 0%, #6a0dad 100%);
+      color: #fff;
+      padding: 15px 50px;
+      font-size: 20px;
+      border: 2px solid rgba(106, 13, 173, 0.5);
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 5px 20px rgba(60, 9, 108, 0.5);
+      transition: all 0.3s;
+      position: relative;
+      z-index: 1;
+      font-family: "Cinzel", serif;
+    }
+    
+    .reset-btn:hover {
+      background: linear-gradient(135deg, #6a0dad 0%, #9d4edd 100%);
+      box-shadow: 0 7px 30px rgba(106, 13, 173, 0.7);
+      transform: translateY(-3px);
+      border-color: rgba(157, 78, 221, 0.7);
+    }
+    
+    /* 안개 효과 */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("배경.png") repeat;
+      opacity: 0.2;
+      animation: fogMove 60s linear infinite;
+      z-index: 0;
+    }
+    
+    @keyframes fogMove {
+      from { background-position: 0 0; }
+      to { background-position: 2000px 0; }
+    }
+    
+    /* 반응형 */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 32px;
+        margin-bottom: 30px;
+      }
+      
+      .endings-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .ending-title {
+        font-size: 20px;
+      }
+      
+      .reset-btn {
+        padding: 12px 35px;
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Another Ending</h1>
+  
+  <div class="endings-grid">
+    <!-- 엔딩 1 -->
+    <div class="ending-item" onclick="goToEnding('page-ending1.html')">
+      <img src="엔딩 1.jpg" alt="새로운 세상">
+      <div class="ending-title">새로운 세상</div>
+    </div>
+    
+    <!-- 엔딩 2 -->
+    <div class="ending-item" onclick="goToEnding('page-ending2.html')">
+      <img src="엔딩 2.png" alt="진실의 가면">
+      <div class="ending-title">진실의 가면</div>
+    </div>
+    
+    <!-- 엔딩 3 -->
+    <div class="ending-item" onclick="goToEnding('page-ending3.html')">
+      <img src="엔딩 3.jpg" alt="미완성의 공간">
+      <div class="ending-title">미완성의 공간</div>
+    </div>
+    
+    <!-- 엔딩 4 -->
+    <div class="ending-item" onclick="goToEnding('page-ending4.html')">
+      <img src="엔딩 4.jpg" alt="굳게 닫힌 문">
+      <div class="ending-title">굳게 닫힌 문</div>
+    </div>
+  </div>
+  
+  <button class="reset-btn" onclick="goToIndex()">시간 되돌리기</button>
+  
+  <script>
+    function goToEnding(page) {
+      window.location.href = page;
+    }
+    
+    function goToIndex() {
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>

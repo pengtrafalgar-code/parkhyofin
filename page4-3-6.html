@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>공론장을 찾아서 - Page4-3-6</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <!-- 공통 CSS 파일 연결 -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom, #0a0a0f, #1a1a2e);
+      color: #e0e0e0;
+      font-family: "Cinzel", serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* 세로 중앙 정렬 */
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding: 0; /* 위쪽 여백 제거 */
+      overflow: hidden; /* 스크롤 제거 */
+    }
+
+    /* 안개 효과 */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("배경.png") repeat;
+      opacity: 0.2;
+      animation: fogMove 60s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes fogMove {
+      from { background-position: 0 0; }
+      to { background-position: 2000px 0; }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      position: relative;
+      z-index: 1;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #ccc;
+      margin-bottom: 50px;
+    }
+
+    .highlight {
+      font-weight: bold;
+      text-shadow: 0 0 1px #fff, 0 0 10px #fff;
+    }
+
+    /* 이미지+버튼 세트 */
+    .image-row {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .image-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .image-block img {
+      width: 200px;   /* 가로 고정 */
+      height: 280px;  /* 세로 고정 */
+      object-fit: cover; /* 비율 유지 */
+      border: none;     
+      border-radius: 0; 
+      box-shadow: none; 
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      background: #6a0dad;
+      color: #fff;
+      padding: 12px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #6a0dad, 0 0 20px #3c096c;
+      transition: 0.3s;
+      width: 180px; /* 버튼 크기 고정 */
+    }
+
+    .btn:hover:not(:disabled) {
+      background: #9d4edd;
+      box-shadow: 0 0 15px #9d4edd, 0 0 30px #c77dff;
+    }
+
+    /* 비활성화 버튼 스타일 */
+    .btn:disabled {
+      background: #555;
+      color: #aaa;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p>
+      공론장의 문은 굳게 잠겨 있다. 문을 열기 위해서는 네 개의 관문을 넘어야 한다.<br>
+      그 봉인은 담론이 제대로 이루어지기 위한 조건.
+      <span class="highlight">이해 가능성</span> ,
+      <span class="highlight">진리성</span> ,
+      <span class="highlight">정당성</span> ,
+      <span class="highlight">진실성</span> 이라는 관문이다.<br>
+      관문에서의 선택에 따라 문은 열릴 수도, 닫힐 수도 있다.<br>
+      이제, 모든 것은 나에게 달려 있다.
+    </p>
+
+    <!-- 가로 일렬 이미지+버튼 -->
+    <div class="image-row">
+      <div class="image-block">
+        <img src="문1.png" alt="문1">
+        <button class="btn" disabled>이해 가능성</button>
+      </div>
+      <div class="image-block">
+        <img src="문2.png" alt="문2">
+        <button class="btn" disabled>진리성</button>
+      </div>
+      <div class="image-block">
+        <img src="문3.png" alt="문3">
+        <button class="btn" disabled>정당성</button>
+      </div>
+      <div class="image-block">
+        <img src="문4.png" alt="문4">
+        <button class="btn" onclick="location.href='page4-4.html'">진실성</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

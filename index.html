@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>공론장을 찾아서</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <!-- 공통 CSS 파일 연결 -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom, #0a0a0f, #1a1a2e); /* 위쪽은 거의 검은색, 아래쪽은 남색 */
+      color: #e0e0e0;
+      font-family: "Cinzel", serif; /* 판타지풍 느낌 */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative; /* ::before가 body를 기준으로 위치할 수 있도록 */
+      overflow: hidden;   /* 안개가 body 밖으로 넘치지 않도록 */
+    }
+
+    h1 {
+      font-size: 50px;
+      color: #9d4edd; /* 보라빛 */
+      text-shadow: 0 0 15px #6a0dad, 0 0 30px #3c096c; /* 빛나는 보라 오라 */
+      margin-bottom: 60px;
+      position: relative; /* 안개 위에 표시되도록 */
+      z-index: 1;
+    }
+
+    p {
+      max-width: 600px;
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      color: #ccc;
+      position: relative;
+      z-index: 1;
+    }
+
+    button {
+      background: #6a0dad;
+      color: #fff;
+      padding: 15px 50px;
+      font-size: 24px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 20px #6a0dad, 0 0 40px #3c096c;
+      transition: 0.3s;
+      position: relative;
+      z-index: 1;
+    }
+    button:hover {
+      background: #9d4edd;
+      box-shadow: 0 0 25px #9d4edd, 0 0 50px #c77dff;
+    }
+
+    /* 안개 효과 */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("배경.png") repeat;
+      opacity: 0.2;
+      animation: fogMove 60s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes fogMove {
+      from { background-position: 0 0; }
+      to { background-position: 2000px 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>공론장을 찾아서</h1>
+  <p>
+    침묵이 지배한 도시에 마지막 불빛이 켜졌다.<br>
+    봉인된 공론장의 문을 향해 나아갈 준비가 되었는가?
+  </p>
+  <button onclick="startGame()">게임 Start</button>
+
+  <script>
+    // 새 게임 시작 시 완전 초기화 (로드 시 한 번)
+    (function resetGameStorage() {
+      const keysToRemove = [
+        'failCount',
+        'page4_1_marked',
+        'page4_2_marked',
+        'page4_3_marked',
+        'page4_4_marked'
+      ];
+      keysToRemove.forEach(key => localStorage.removeItem(key));
+      // 디버깅용 로그 (원치 않으면 지워도 됨)
+      // console.log('game storage reset:', keysToRemove);
+    })();
+
+    function startGame() {
+      // 안전을 위해 게임 시작 직전에 한 번 더 초기화
+      const keysToRemove = [
+        'failCount',
+        'page4_1_marked',
+        'page4_2_marked',
+        'page4_3_marked',
+        'page4_4_marked'
+      ];
+      keysToRemove.forEach(key => localStorage.removeItem(key));
+
+      // 첫 문제로 이동
+      window.location.href = "page1.html";
+    }
+  </script>
+</body>
+</html>

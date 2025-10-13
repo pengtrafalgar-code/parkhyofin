@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>공론장을 찾아서 - Page 4-2-pass</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <!-- 공통 CSS 파일 연결 -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom, #0a0a0f, #1a1a2e);
+      color: #e0e0e0;
+      font-family: "Cinzel", serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    img {
+      max-width: 30%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px #6a0dad, 0 0 30px #3c096c;
+      position: relative;
+      z-index: 1;
+    }
+
+    p {
+      max-width: 650px;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #ccc;
+      margin: 5px 0 15px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 0 1px #fff, 0 0 10px #fff;
+    }
+
+    button {
+      background: #6a0dad;
+      color: #fff;
+      padding: 12px 28px;
+      font-size: 18px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-top: 10px;
+      box-shadow: 0 0 15px #6a0dad, 0 0 30px #3c096c;
+      transition: 0.3s;
+      position: relative;
+      z-index: 1;
+    }
+    button:hover {
+      background: #9d4edd;
+      box-shadow: 0 0 20px #9d4edd, 0 0 40px #c77dff;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url("배경.png") repeat;
+      opacity: 0.2;
+      animation: fogMove 60s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes fogMove {
+      from { background-position: 0 0; }
+      to { background-position: 2000px 0; }
+    }
+  </style>
+</head>
+<body>
+  <img src="열린 공론장의 문.png" alt="열린 공론장의 문 이미지">
+
+  <p>
+    당신의 선택으로 <span class="highlight">공론장의 문이 조금 열렸습니다.</span><br>
+    기회는 다시 주어지지 않습니다. 앞으로도 신중히 선택하세요.
+  </p>
+
+  <button onclick="goNext()">다음 관문으로</button>
+
+  <script>
+    if (!localStorage.getItem('failCount')) {
+      localStorage.setItem('failCount', 0);
+    }
+
+    function goNext() {
+      window.location.href = "page4-2-3.html"; 
+    }
+  </script>
+</body>
+</html>

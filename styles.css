@@ -1,0 +1,27 @@
+/* 반응형 기본 설정 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* 가로 스크롤 방지 */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 태블릿 */
+@media (max-width: 1024px) {
+  /* 필요시 조정 */
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+  h1 { font-size: 24px !important; }
+  p { font-size: 14px !important; }
+  button { font-size: 16px !important; }
+}

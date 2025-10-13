@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>공론장을 찾아서 - 진실의 가면</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <!-- 공통 CSS 파일 연결 -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom, #0a0a0f, #1a1a2e);
+      color: #e0e0e0;
+      font-family: "Cinzel", serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding: 5px;
+      overflow: hidden;
+    }
+    
+    h1 {
+      font-size: 36px;
+      margin: 0 0 20px 0;
+      text-shadow: 0 0 10px #fff;
+      position: relative;
+      z-index: 1;
+    }
+    
+    img {
+      max-width: 25%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px #6a0dad, 0 0 30px #3c096c;
+      position: relative;
+      z-index: 1;
+    }
+    
+    p {
+      max-width: 600px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #ccc;
+      margin: 5px 0 15px 0;
+      position: relative;
+      z-index: 1;
+    }
+    
+    button {
+      background: #6a0dad;
+      color: #fff;
+      padding: 10px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-top: 5px;
+      box-shadow: 0 0 15px #6a0dad, 0 0 30px #3c096c;
+      transition: 0.3s;
+      position: relative;
+      z-index: 1;
+    }
+    
+    button:hover {
+      background: #9d4edd;
+      box-shadow: 0 0 20px #9d4edd, 0 0 40px #c77dff;
+    }
+    
+    /* 안개 효과 */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("배경.png") repeat;
+      opacity: 0.2;
+      animation: fogMove 60s linear infinite;
+      z-index: 0;
+    }
+    
+    @keyframes fogMove {
+      from { background-position: 0 0; }
+      to { background-position: 2000px 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>진실의 가면</h1>
+  <img src="엔딩 2.png" alt="진실의 가면">
+  <p>
+    문이 반쯤 열리며 공론장의 빛이 세상 곳곳으로 퍼져나갔다.<br>
+    사람들은 서로를 이해하고 진실을 나누며 정당한 규칙 속에서 토론할 수 있게 되었다.<br>
+    그러나 진실의 가면은 아직도 남아 있다. 때때로 위선이 공론장을 흐린다.<br>
+    사람들은 이를 대화의 힘으로 극복하고자 애썼다.
+  </p>
+  <button onclick="goNext()">다른 세상 확인하기</button>
+  
+  <script>
+    function goNext() {
+      window.location.href = "page-another.html";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>공론장을 찾아서 — 의사의 방 (질문)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <!-- 공통 CSS 파일 연결 -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* --- 기본 스타일 --- */
+    html, body { height:100%; margin:0; }
+    body{
+      height:100vh;
+      background: linear-gradient(to bottom, #0a0a0f, #1a1a2e);
+      color: #e0e0e0;
+      font-family: "Cinzel", serif;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      overflow:hidden;
+      position:relative;
+    }
+
+    /* 안개 효과 */
+    body::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: url("배경.png") repeat;
+      opacity:0.20;
+      z-index:0;
+      animation: fogMove 60s linear infinite;
+    }
+    @keyframes fogMove { from{background-position:0 0;} to{background-position:2000px 0;} }
+
+    /* 컨테이너 */
+    .wrap{
+      width:100%;
+      max-width:1100px;
+      z-index:1;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:14px; /* 전체 요소 간 기본 간격 줄임 */
+      padding:40px 16px; /* 위아래 여백 적당히 유지 */
+      box-sizing:border-box;
+    }
+
+    /* 사진 (조금 더 크게 조정) */
+    .speech-img {
+      width: 75%; /* 기존 72% → 확대 */
+      max-width: 860px;
+      height: auto;
+      display:block;
+      margin: 0 auto;
+      box-shadow: none;
+      border-radius: 6px;
+      object-fit: contain;
+      max-height: 30vh; /* 기존 24vh → 확대 */
+    }
+
+    /* 질문 텍스트 */
+    .question {
+      font-size: 20px;
+      max-width: 880px;
+      line-height: 1.5;
+      margin-top: 6px; /* 위쪽 간격 줄임 */
+      margin-bottom: 6px; /* 아래쪽 간격 줄임 */
+      font-weight: bold;
+    }
+
+    /* 버튼 스타일 (공통) */
+    .choice-btn{
+      background: #6a0dad;
+      color: #fff;
+      padding: 12px 20px; /* 버튼 안 여백 살짝 축소 */
+      font-size: 18px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #6a0dad, 0 0 20px #3c096c;
+      transition: 0.25s;
+      width: 80%;
+      max-width: 900px;
+      margin: 5px 0; /* 선택지 간 간격 줄임 (기존 8px → 5px) */
+    }
+    .choice-btn:hover{
+      background: #9d4edd;
+      box-shadow: 0 0 15px #9d4edd, 0 0 30px #c77dff;
+    }
+
+    /* 반응형 */
+    @media (max-width: 900px){
+      .speech-img { max-height: 25vh; width:80%; }
+      .question { font-size: 16px; padding: 0 6px; margin:4px 0; }
+      .choice-btn { font-size:15px; padding:10px 18px; width:95%; margin:4px 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- 1) 사진 -->
+    <img src="의사의 말.png" alt="의사의 말" class="speech-img">
+
+    <!-- 2) 질문 -->
+    <div class="question">힌트를 바탕으로 의사의 말을 정확하게 해석해보자.</div>
+
+    <!-- 3) 버튼들 -->
+    <button class="choice-btn" onclick="location.href='page4-1-fail.html'">
+      “환자분은 위산 분비 과다로 인해 위 점막이 손상되면서 발생하는 소화성 궤양이 의심됩니다. 궤양은 통증과 출혈을 유발할 수 있으며, 장기간 방치할 경우 위장 출혈이나 천공으로 이어질 위험이 있습니다.”
+    </button>
+
+    <button class="choice-btn" onclick="location.href='page4-1-fail.html'">
+      “환자분은 알레르기 반응으로 식도 점막이 부어오른 것으로 의심됩니다. 증상으로는 호흡 곤란과 가슴 통증이 나타날 수 있습니다. 대부분의 경우 식이 조절과 스테로이드 치료로 호전될 수 있으니 관리가 필요합니다.”
+    </button>
+
+    <button class="choice-btn" onclick="location.href='page4-1-pass.html'">
+      “환자분은 지금 위산이 자주 역류하는 병이 있어서 식도에 손상이 생기고 있습니다. 조직검사 결과, 식도 점막의 정상 세포가 이미 변형된 상태라 앞으로 식도암으로 발전할 위험이 있습니다.”
+    </button>
+
+    <button class="choice-btn" onclick="location.href='page4-1-fail.html'">
+      “환자분은 식도 벽이 일부 돌출되는 식도 게실을 가지고 있는 것으로 보입니다. 이로 인해 삼킴 곤란이나 음식물 역류가 나타날 수 있습니다. 심한 경우에는 외과적 절제술이 필요하지만, 대체로 양성 질환에 속합니다.”
+    </button>
+  </div>
+</body>
+</html>

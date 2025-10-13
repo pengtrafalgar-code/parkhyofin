@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>공론장을 찾아서 - Page 4-4</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <!-- 공통 CSS 파일 연결 -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom, #0a0a0f, #1a1a2e);
+      color: #e0e0e0;
+      font-family: "Cinzel", serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* 세로 중앙 */
+      align-items: center;     /* 가로 중앙 */
+      text-align: center;
+      position: relative;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    /* 안개 효과 */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("배경.png") repeat;
+      opacity: 0.2;
+      animation: fogMove 60s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes fogMove {
+      from { background-position: 0 0; }
+      to { background-position: 2000px 0; }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px; /* 요소 간격 */
+      max-width: 800px;
+    }
+
+    .container img {
+      max-width: 80%;   /* 반응형 크기 */
+      height: auto;     /* 비율 유지 */
+      border-radius: 12px;
+      box-shadow: 0 0 15px #6a0dad, 0 0 30px #3c096c;
+    }
+
+    p {
+      font-size: 20px;
+      line-height: 1.6;
+      color: #ccc;
+      margin: 0;
+    }
+
+    .highlight {
+      font-weight: bold;
+      text-shadow: 0 0 1px #fff, 0 0 12px #fff;
+    }
+
+    .btn {
+      background: #6a0dad;
+      color: #fff;
+      padding: 14px 24px;
+      font-size: 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #6a0dad, 0 0 20px #3c096c;
+      transition: 0.3s;
+      width: 220px;
+    }
+
+    .btn:hover {
+      background: #9d4edd;
+      box-shadow: 0 0 15px #9d4edd, 0 0 30px #c77dff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="가면 사진.png" alt="가면 사진">
+    <p>
+      진실은 언제나 하나! 눈 앞의 현자도 믿을 수 없다.웃음 뒤에 <span class="highlight">숨은 속내</span> 를 파헤쳐보자.<br>
+      SNS 속 말은 진심일까, 꾸며낸 감정일까?
+    </p>
+    <button class="btn" onclick="location.href='page4-4-1.html'">SNS 확인하기</button>
+  </div>
+</body>
+</html>

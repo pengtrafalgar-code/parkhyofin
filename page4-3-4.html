@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>기업의 탄소 배출 규제</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <!-- 공통 CSS 파일 연결 -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* 기본 레이아웃 */
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom, #0a0a0f, #1a1a2e);
+      color: #e0e0e0;
+      font-family: "Cinzel", serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 30px;
+      margin: 10px 0;
+      text-shadow: 0 0 10px #fff;
+      position: relative;
+      z-index: 10;
+    }
+
+    p {
+      max-width: 850px;
+      font-size: 18px;
+      line-height: 1.7;
+      color: #ccc;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* 아이콘 게이지 영역 */
+    .gauges {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 10;
+    }
+
+    .gauge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    svg {
+      width: 110px;
+      height: 110px;
+    }
+
+    .gauge-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #ccc;
+      text-shadow: 0 0 5px #9d4edd;
+    }
+
+    /* 선택지 영역 */
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      max-width: 700px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      z-index: 50;
+      pointer-events: auto;
+    }
+
+    button {
+      background: #6a0dad;
+      color: #fff;
+      padding: 15px 50px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 20px #6a0dad, 0 0 40px #3c096c;
+      transition: 0.3s;
+      position: relative;
+      z-index: 1;
+    }
+    button:hover {
+      background: #9d4edd;
+      box-shadow: 0 0 25px #9d4edd, 0 0 50px #c77dff;
+    }
+
+    /* 안개 배경 */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("배경.png") repeat;
+      opacity: 0.2;
+      animation: fogMove 60s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes fogMove {
+      from { background-position: 0 0; }
+      to { background-position: 2000px 0; }
+    }
+
+    /* 반응형 */
+    @media (max-width: 480px) {
+      .choice-btn { font-size: 16px; padding: 10px; }
+      svg { width: 88px; height: 88px; }
+      h1 { font-size: 22px; }
+      p { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 아이콘 게이지 영역 -->
+  <div class="gauges">
+    <!-- 자유 아이콘 -->
+    <div class="gauge">
+      <svg viewBox="119 293 96 96" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="freedom-clip">
+            <path d="M164.5 313C149 313 136.5 325.5 136.5 341 136.5 345.9 137.8 350.5 140 354.5 142.1 352.3 144.4 350.1 146.9 347.7 153.2 341.8 160.6 335.8 166.8 331.4 167.2 331.1 167.6 330.9 168.1 330.9 169.2 330.9 170.1 331.8 170.1 332.9 170.1 333.6 169.8 334.1 169.3 334.5L169.3 334.5C160.4 340.9 148.6 350.8 140.6 359.8 140.6 359.8 139.5 361 139 361.6L139 361.6C134.5 366.9 131.5 371.7 131.5 375.1L137.5 375.1C137.5 372.9 141 368.1 146.3 362.4 151.2 366.6 157.5 369.1 164.5 369.1 169.5 369.1 174.3 367.8 178.4 365.4L178.4 365.4C199.8 353.5 202.5 331.6 202.5 307 202.5 307 179.2 313.4 164.5 313Z"/>
+          </clipPath>
+        </defs>
+        <path fill="#ddd" d="M164.5 313C149 313 136.5 325.5 136.5 341 136.5 345.9 137.8 350.5 140 354.5 142.1 352.3 144.4 350.1 146.9 347.7 153.2 341.8 160.6 335.8 166.8 331.4 167.2 331.1 167.6 330.9 168.1 330.9 169.2 330.9 170.1 331.8 170.1 332.9 170.1 333.6 169.8 334.1 169.3 334.5L169.3 334.5C160.4 340.9 148.6 350.8 140.6 359.8 140.6 359.8 139.5 361 139 361.6L139 361.6C134.5 366.9 131.5 371.7 131.5 375.1L137.5 375.1C137.5 372.9 141 368.1 146.3 362.4 151.2 366.6 157.5 369.1 164.5 369.1 169.5 369.1 174.3 367.8 178.4 365.4L178.4 365.4C199.8 353.5 202.5 331.6 202.5 307 202.5 307 179.2 313.4 164.5 313Z"/>
+        <rect class="fill-rect" id="fill-freedom" x="119" y="341" width="96" height="48" fill="purple" clip-path="url(#freedom-clip)"/>
+      </svg>
+      <div class="gauge-title">자유</div>
+    </div>
+
+    <!-- 평등 아이콘 -->
+    <div class="gauge">
+      <svg viewBox="386 315 64 68" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="equality-clip">
+            <path d="M434 331C434 339.837 426.837 347 418 347 409.163 347 402 339.837 402 331 402 322.163 409.163 315 418 315 426.837 315 434 322.163 434 331Z"/>
+            <path fill="#ddd" d="M450 383 450 367C450 364.6 448.8 362.2 446.8 360.6 442.4 357 436.8 354.6 431.2 353 427.2 351.8 422.8 351 418 351 413.6 351 409.2 351.8 404.8 353 399.2 354.6 393.6 357.4 389.2 360.6 387.2 362.2 386 364.6 386 367L386 383 450 383Z"/>
+          </clipPath>
+        </defs>
+        <path fill="#ddd" d="M434 331C434 339.837 426.837 347 418 347 409.163 347 402 339.837 402 331 402 322.163 409.163 315 418 315 426.837 315 434 322.163 434 331Z"/>
+        <path fill="#ddd" d="M450 383 450 367C450 364.6 448.8 362.2 446.8 360.6 442.4 357 436.8 354.6 431.2 353 427.2 351.8 422.8 351 418 351 413.6 351 409.2 351.8 404.8 353 399.2 354.6 393.6 357.4 389.2 360.6 387.2 362.2 386 364.6 386 367L386 383 450 383Z"/>
+        <rect class="fill-rect" id="fill-equality" x="386" y="349" width="64" height="34" fill="purple" clip-path="url(#equality-clip)"/>
+      </svg>
+      <div class="gauge-title">평등</div>
+    </div>
+
+    <!-- 안전 아이콘 -->
+    <div class="gauge">
+      <svg viewBox="510 304 68 77" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="safety-clip">
+            <path d="M544 329.2C531.4 304.2 510 319.2 510 333.2 510 354.2 544 380.2 544 380.2 544 380.2 578 354.2 578 333.2 578 319.2 556.6 304.2 544 329.2Z"/>
+          </clipPath>
+        </defs>
+        <path fill="#ddd" d="M544 329.2C531.4 304.2 510 319.2 510 333.2 510 354.2 544 380.2 544 380.2 544 380.2 578 354.2 578 333.2 578 319.2 556.6 304.2 544 329.2Z"/>
+        <rect class="fill-rect" id="fill-safety" x="510" y="342.5" width="68" height="38.5" fill="purple" clip-path="url(#safety-clip)"/>
+      </svg>
+      <div class="gauge-title">안전</div>
+    </div>
+
+    <!-- 재정 아이콘 -->
+    <div class="gauge">
+      <svg viewBox="628 316 85 65" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="finance-clip">
+            <path d="M704 349C703.5 349 703.1 348.7 702.8 348.4 702.3 347.9 702 347 702 346.1 702 344.8 702.9 343.8 703.7 343.2L703.8 343.1C705.7 344.1 706 345.1 706 346 706 347.6 705.1 349 704 349ZM676.8 329.3C676.5 330 675.7 330.5 675 330.5 674.7 330.5 674.4 330.4 674.2 330.3 671 328.8 667.5 328 664.2 328 662.3 328 660.4 328.3 658.5 328.8 657.4 329.1 656.3 328.5 656 327.4 655.7 326.3 656.3 325.2 657.4 324.9 659.6 324.3 661.9 324 664.1 324 667.9 324 672 324.9 675.7 326.6 676.8 327.1 677.3 328.3 676.8 329.3ZM711.3 337C708.8 336.6 705.7 337.3 703.2 338.7 700.9 338.2 697.4 338.2 694.2 339.3 689.5 328.1 676.4 320 664 320 659.7 320 655.4 321 651.5 322.8L639.2 317C638.4 316.6 637.5 317.4 637.8 318.2L641.8 329.5C639.4 332 637.4 334.9 636 338.1 635.8 338.7 635.3 339.1 634.6 339.3L631 340.2C629.2 340.6 628 342.2 628 344.1L628 351.9C628 353.7 629.2 355.3 631 355.8L634.7 356.7C635.3 356.9 635.8 357.3 636.1 357.9 637.8 361.8 640.4 365.3 643.6 368.2 643.9 368.5 644.2 368.9 644.3 369.4L645.8 378.5C646 379.5 646.8 380.2 647.8 380.2L654.4 380.2C655.4 380.2 656.2 379.5 656.4 378.5L656.9 375.3C659.2 375.9 661.6 376.2 664.1 376.2 666.8 376.2 669.6 375.8 672.2 375.1L672.8 378.5C673 379.5 673.8 380.2 674.8 380.2L681.4 380.2C682.4 380.2 683.2 379.5 683.4 378.5L684.9 369.4C685 368.9 685.2 368.5 685.6 368.2 691.7 362.9 696 355.9 696 348 696 346.3 695.8 344.7 695.4 343.1 696.6 342.7 697.9 342.4 699.1 342.4 698.4 343.5 698 344.7 698 346 697.9 348 698.7 349.9 700 351.3 701.1 352.4 702.5 353.1 704 353.1 707.3 353.1 710 350 710 346.1 710 344.2 709.3 342.5 707.9 341.2 708.9 341 709.8 340.9 710.7 341 711.8 341.2 712.8 340.4 713 339.3 713.1 338.2 712.4 337.2 711.3 337Z"/>
+          </clipPath>
+        </defs>
+        <path fill="#ddd" d="M704 349C703.5 349 703.1 348.7 702.8 348.4 702.3 347.9 702 347 702 346.1 702 344.8 702.9 343.8 703.7 343.2L703.8 343.1C705.7 344.1 706 345.1 706 346 706 347.6 705.1 349 704 349ZM676.8 329.3C676.5 330 675.7 330.5 675 330.5 674.7 330.5 674.4 330.4 674.2 330.3 671 328.8 667.5 328 664.2 328 662.3 328 660.4 328.3 658.5 328.8 657.4 329.1 656.3 328.5 656 327.4 655.7 326.3 656.3 325.2 657.4 324.9 659.6 324.3 661.9 324 664.1 324 667.9 324 672 324.9 675.7 326.6 676.8 327.1 677.3 328.3 676.8 329.3ZM711.3 337C708.8 336.6 705.7 337.3 703.2 338.7 700.9 338.2 697.4 338.2 694.2 339.3 689.5 328.1 676.4 320 664 320 659.7 320 655.4 321 651.5 322.8L639.2 317C638.4 316.6 637.5 317.4 637.8 318.2L641.8 329.5C639.4 332 637.4 334.9 636 338.1 635.8 338.7 635.3 339.1 634.6 339.3L631 340.2C629.2 340.6 628 342.2 628 344.1L628 351.9C628 353.7 629.2 355.3 631 355.8L634.7 356.7C635.3 356.9 635.8 357.3 636.1 357.9 637.8 361.8 640.4 365.3 643.6 368.2 643.9 368.5 644.2 368.9 644.3 369.4L645.8 378.5C646 379.5 646.8 380.2 647.8 380.2L654.4 380.2C655.4 380.2 656.2 379.5 656.4 378.5L656.9 375.3C659.2 375.9 661.6 376.2 664.1 376.2 666.8 376.2 669.6 375.8 672.2 375.1L672.8 378.5C673 379.5 673.8 380.2 674.8 380.2L681.4 380.2C682.4 380.2 683.2 379.5 683.4 378.5L684.9 369.4C685 368.9 685.2 368.5 685.6 368.2 691.7 362.9 696 355.9 696 348 696 346.3 695.8 344.7 695.4 343.1 696.6 342.7 697.9 342.4 699.1 342.4 698.4 343.5 698 344.7 698 346 697.9 348 698.7 349.9 700 351.3 701.1 352.4 702.5 353.1 704 353.1 707.3 353.1 710 350 710 346.1 710 344.2 709.3 342.5 707.9 341.2 708.9 341 709.8 340.9 710.7 341 711.8 341.2 712.8 340.4 713 339.3 713.1 338.2 712.4 337.2 711.3 337Z"/>
+        <rect class="fill-rect" id="fill-finance" x="628" y="348.5" width="85" height="32.5" fill="purple" clip-path="url(#finance-clip)"/>
+      </svg>
+      <div class="gauge-title">재정</div>
+    </div>
+  </div>
+
+  <!-- 제목 -->
+  <h1>기업의 탄소 배출 규제</h1>
+
+  <!-- 본문 -->
+  <p>
+    기후 위기는 모두에게 영향을 미칩니다. 기업의 책임을 강화해야 한다는 목소리와.<br>
+    경제 성장을 우선해야 한다는 목소리가 충돌하고 있습니다.<br>
+    기업의 탄소 배출을 얼마나 규제하는 게 좋을까요?
+  </p>
+
+  <!-- 선택지 -->
+  <div class="options">
+    <button class="choice-btn" onclick="saveChoice('strictRegulation')">
+      탄소 배출을 법으로 강제해야 한다. 기업이 움직이지 않으면 지구가 죽는다.
+    </button>
+    <button class="choice-btn" onclick="saveChoice('carbonTax')">
+      탄소세를 도입해 기업이 탄소를 줄일수록 이익을 보는 구조를 만들자.
+    </button>
+    <button class="choice-btn" onclick="saveChoice('voluntary')">
+      기업의 자율과 혁신을 믿자. 강제보다 자발적인 탄소 규제를 유도하자.
+    </button>
+    <button class="choice-btn" onclick="saveChoice('relaxRegulation')">
+      경제 성장이 먼저다. 규제는 지금보다 완화되어야 한다.
+    </button>
+  </div>
+
+  <script>
+    // 각 게이지의 기본 설정 (viewBox 높이 기준)
+    const baseSettings = {
+      'fill-freedom': { viewBoxY: 293, viewBoxHeight: 96, baseY: 341 },
+      'fill-equality': { viewBoxY: 315, viewBoxHeight: 68, baseY: 349 },
+      'fill-safety': { viewBoxY: 304, viewBoxHeight: 77, baseY: 342.5 },
+      'fill-finance': { viewBoxY: 316, viewBoxHeight: 65, baseY: 348.5 }
+    };
+
+    // page4-3-1 선택에 따른 변동값 (%)
+    const transportEffects = {
+      'fullFree': { freedom: 25, equality: 25, safety: 0, finance: -50 },
+      'gradualFree': { freedom: 25, equality: 25, safety: 0, finance: -25 },
+      'lowIncomeSupport': { freedom: 0, equality: 50, safety: 0, finance: -25 },
+      'keepStatus': { freedom: -25, equality: -25, safety: 0, finance: 50 }
+    };
+
+    // page4-3-2 선택에 따른 변동값 (%)
+    const refugeeEffects = {
+      'fullOpen': { freedom: 50, equality: 50, safety: -25, finance: -50 },
+      'limitedAccept': { freedom: 25, equality: 50, safety: 0, finance: -25 },
+      'selectiveAccept': { freedom: 0, equality: -25, safety: 0, finance: 25 },
+      'noAccept': { freedom: -50, equality: -50, safety: 25, finance: 50 }
+    };
+
+    // page4-3-3 선택에 따른 변동값 (%)
+    const surveillanceEffects = {
+      'fullSurveillance': { freedom: -50, equality: 0, safety: 50, finance: -50 },
+      'publicPlaces': { freedom: -25, equality: 0, safety: 25, finance: -25 },
+      'limitedUse': { freedom: 25, equality: 0, safety: 25, finance: 0 },
+      'noExpansion': { freedom: 50, equality: 0, safety: -25, finance: 25 }
+    };
+
+    // 퍼센트를 실제 height와 y 값으로 변환하는 함수
+    function percentToValues(gaugeId, percent) {
+      const base = baseSettings[gaugeId];
+      const height = (base.viewBoxHeight * percent) / 100;
+      const y = base.viewBoxY + base.viewBoxHeight - height;
+      return { y, height };
+    }
+
+    // 애니메이션 함수
+    function animateGauge(gaugeId, startPercent, endPercent, duration = 1000) {
+      const rect = document.getElementById(gaugeId);
+      if (!rect) return;
+
+      const startTime = performance.now();
+      const startValues = percentToValues(gaugeId, startPercent);
+      const endValues = percentToValues(gaugeId, endPercent);
+
+      function animate(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // easeInOutCubic 효과
+        const easeProgress = progress < 0.5
+          ? 4 * progress * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+        const currentY = startValues.y + (endValues.y - startValues.y) * easeProgress;
+        const currentHeight = startValues.height + (endValues.height - startValues.height) * easeProgress;
+
+        rect.setAttribute('y', currentY);
+        rect.setAttribute('height', currentHeight);
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    // 페이지 로드 시 실행
+    window.addEventListener('DOMContentLoaded', () => {
+      // 이전 페이지들의 선택값 불러오기
+      const transportChoice = localStorage.getItem('transportChoice');
+      const refugeeChoice = localStorage.getItem('refugeeChoice');
+      const surveillanceChoice = localStorage.getItem('surveillanceChoice');
+      
+      // 누적 효과 계산 (50%에서 시작)
+      let cumulativeValues = { freedom: 50, equality: 50, safety: 50, finance: 50 };
+      
+      // page4-3-1 효과 적용
+      if (transportChoice && transportEffects[transportChoice]) {
+        const effects = transportEffects[transportChoice];
+        cumulativeValues.freedom += effects.freedom;
+        cumulativeValues.equality += effects.equality;
+        cumulativeValues.safety += effects.safety;
+        cumulativeValues.finance += effects.finance;
+      }
+      
+      // page4-3-2 효과 적용
+      if (refugeeChoice && refugeeEffects[refugeeChoice]) {
+        const effects = refugeeEffects[refugeeChoice];
+        cumulativeValues.freedom += effects.freedom;
+        cumulativeValues.equality += effects.equality;
+        cumulativeValues.safety += effects.safety;
+        cumulativeValues.finance += effects.finance;
+      }
+
+      // page4-3-3 효과 적용
+      if (surveillanceChoice && surveillanceEffects[surveillanceChoice]) {
+        const effects = surveillanceEffects[surveillanceChoice];
+        cumulativeValues.freedom += effects.freedom;
+        cumulativeValues.equality += effects.equality;
+        cumulativeValues.safety += effects.safety;
+        cumulativeValues.finance += effects.finance;
+      }
+
+      // 시작 게이지 값 계산 (page4-3-3에서의 최종값 = 애니메이션 시작점)
+      let startValues = { freedom: 50, equality: 50, safety: 50, finance: 50 };
+      
+      if (transportChoice && transportEffects[transportChoice]) {
+        const effects = transportEffects[transportChoice];
+        startValues.freedom += effects.freedom;
+        startValues.equality += effects.equality;
+        startValues.safety += effects.safety;
+        startValues.finance += effects.finance;
+      }
+
+      if (refugeeChoice && refugeeEffects[refugeeChoice]) {
+        const effects = refugeeEffects[refugeeChoice];
+        startValues.freedom += effects.freedom;
+        startValues.equality += effects.equality;
+        startValues.safety += effects.safety;
+        startValues.finance += effects.finance;
+      }
+
+      // 0% 이하 체크 (최종값 기준)
+      if (cumulativeValues.freedom <= 0 || cumulativeValues.equality <= 0 || 
+          cumulativeValues.safety <= 0 || cumulativeValues.finance <= 0) {
+        location.href = "page4-3-fail.html";
+        return;
+      }
+
+      // 정상적으로 애니메이션 실행 (page4-3-3 최종값에서 page4-3-4 최종값으로)
+      animateGauge('fill-freedom', startValues.freedom, cumulativeValues.freedom, 1500);
+      animateGauge('fill-equality', startValues.equality, cumulativeValues.equality, 1500);
+      animateGauge('fill-safety', startValues.safety, cumulativeValues.safety, 1500);
+      animateGauge('fill-finance', startValues.finance, cumulativeValues.finance, 1500);
+    });
+
+    // 선택한 내용을 localStorage에 저장하고 다음 페이지로 이동
+    function saveChoice(option) {
+      localStorage.setItem('carbonChoice', option);
+      location.href = "page4-3-5.html";
+    }
+  </script>
+</body>
+</html>
