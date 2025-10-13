@@ -7,6 +7,7 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden; /* 가로 스크롤 방지 */
+  padding-bottom: 40px;
 }
 
 img {
@@ -24,4 +25,5 @@ img {
   h1 { font-size: 24px !important; }
   p { font-size: 14px !important; }
   button { font-size: 16px !important; }
+
 }
