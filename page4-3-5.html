@@ -48,7 +48,7 @@
       flex-direction: row;
       justify-content: center;
       gap: 40px;
-      margin-top: 20px;
+      margin-top: 30px;
       margin-bottom: 20px;
       flex-wrap: wrap;
       position: relative;
@@ -326,56 +326,96 @@
       });
     }
 
-    // 페이지 로드 시 실행 - page4-3-4까지의 게이지 표시
-    window.addEventListener('DOMContentLoaded', () => {
-      // 이전 페이지들의 선택값 불러오기
-      const transportChoice = localStorage.getItem('transportChoice');
-      const refugeeChoice = localStorage.getItem('refugeeChoice');
-      const surveillanceChoice = localStorage.getItem('surveillanceChoice');
-      const carbonChoice = localStorage.getItem('carbonChoice');
-      
-      // page4-3-1 효과 적용
-      if (transportChoice && transportEffects[transportChoice]) {
-        const effects = transportEffects[transportChoice];
-        currentValues.freedom += effects.freedom;
-        currentValues.equality += effects.equality;
-        currentValues.safety += effects.safety;
-        currentValues.finance += effects.finance;
-      }
-      
-      // page4-3-2 효과 적용
-      if (refugeeChoice && refugeeEffects[refugeeChoice]) {
-        const effects = refugeeEffects[refugeeChoice];
-        currentValues.freedom += effects.freedom;
-        currentValues.equality += effects.equality;
-        currentValues.safety += effects.safety;
-        currentValues.finance += effects.finance;
-      }
+ // 페이지 로드 시 실행
+window.addEventListener('DOMContentLoaded', () => {
+  // 이전 페이지들의 선택값 불러오기
+  const transportChoice = localStorage.getItem('transportChoice');
+  const refugeeChoice = localStorage.getItem('refugeeChoice');
+  const surveillanceChoice = localStorage.getItem('surveillanceChoice');
+  const carbonChoice = localStorage.getItem('carbonChoice');
+  
+  // 누적 효과 계산 (50%에서 시작)
+  let cumulativeValues = { freedom: 50, equality: 50, safety: 50, finance: 50 };
+  
+  // page4-3-1 효과 적용
+  if (transportChoice && transportEffects[transportChoice]) {
+    const effects = transportEffects[transportChoice];
+    cumulativeValues.freedom += effects.freedom;
+    cumulativeValues.equality += effects.equality;
+    cumulativeValues.safety += effects.safety;
+    cumulativeValues.finance += effects.finance;
+  }
+  
+  // page4-3-2 효과 적용
+  if (refugeeChoice && refugeeEffects[refugeeChoice]) {
+    const effects = refugeeEffects[refugeeChoice];
+    cumulativeValues.freedom += effects.freedom;
+    cumulativeValues.equality += effects.equality;
+    cumulativeValues.safety += effects.safety;
+    cumulativeValues.finance += effects.finance;
+  }
 
-      // page4-3-3 효과 적용
-      if (surveillanceChoice && surveillanceEffects[surveillanceChoice]) {
-        const effects = surveillanceEffects[surveillanceChoice];
-        currentValues.freedom += effects.freedom;
-        currentValues.equality += effects.equality;
-        currentValues.safety += effects.safety;
-        currentValues.finance += effects.finance;
-      }
+  // page4-3-3 효과 적용
+  if (surveillanceChoice && surveillanceEffects[surveillanceChoice]) {
+    const effects = surveillanceEffects[surveillanceChoice];
+    cumulativeValues.freedom += effects.freedom;
+    cumulativeValues.equality += effects.equality;
+    cumulativeValues.safety += effects.safety;
+    cumulativeValues.finance += effects.finance;
+  }
 
-      // page4-3-4 효과 적용
-      if (carbonChoice && carbonEffects[carbonChoice]) {
-        const effects = carbonEffects[carbonChoice];
-        currentValues.freedom += effects.freedom;
-        currentValues.equality += effects.equality;
-        currentValues.safety += effects.safety;
-        currentValues.finance += effects.finance;
-      }
+  // page4-3-4 효과 적용
+  if (carbonChoice && carbonEffects[carbonChoice]) {
+    const effects = carbonEffects[carbonChoice];
+    cumulativeValues.freedom += effects.freedom;
+    cumulativeValues.equality += effects.equality;
+    cumulativeValues.safety += effects.safety;
+    cumulativeValues.finance += effects.finance;
+  }
 
-      // page4-3-4까지의 게이지 표시 (50%에서 시작해서 애니메이션)
-      animateGauge('fill-freedom', 50, currentValues.freedom, 1500);
-      animateGauge('fill-equality', 50, currentValues.equality, 1500);
-      animateGauge('fill-safety', 50, currentValues.safety, 1500);
-      animateGauge('fill-finance', 50, currentValues.finance, 1500);
-    });
+  // 시작 게이지 값 계산 (page4-3-4에서의 최종값 = 애니메이션 시작점)
+  let startValues = { freedom: 50, equality: 50, safety: 50, finance: 50 };
+  
+  if (transportChoice && transportEffects[transportChoice]) {
+    const effects = transportEffects[transportChoice];
+    startValues.freedom += effects.freedom;
+    startValues.equality += effects.equality;
+    startValues.safety += effects.safety;
+    startValues.finance += effects.finance;
+  }
+
+  if (refugeeChoice && refugeeEffects[refugeeChoice]) {
+    const effects = refugeeEffects[refugeeChoice];
+    startValues.freedom += effects.freedom;
+    startValues.equality += effects.equality;
+    startValues.safety += effects.safety;
+    startValues.finance += effects.finance;
+  }
+
+  if (surveillanceChoice && surveillanceEffects[surveillanceChoice]) {
+    const effects = surveillanceEffects[surveillanceChoice];
+    startValues.freedom += effects.freedom;
+    startValues.equality += effects.equality;
+    startValues.safety += effects.safety;
+    startValues.finance += effects.finance;
+  }
+
+  // currentValues를 cumulativeValues로 업데이트
+  currentValues = { ...cumulativeValues };
+
+  // 0% 이하 체크 (최종값 기준)
+  if (cumulativeValues.freedom <= 0 || cumulativeValues.equality <= 0 || 
+      cumulativeValues.safety <= 0 || cumulativeValues.finance <= 0) {
+    location.href = "page4-3-fail.html";
+    return;
+  }
+
+  // 정상적으로 애니메이션 실행 (page4-3-4 최종값에서 page4-3-5 최종값으로)
+  animateGauge('fill-freedom', startValues.freedom, cumulativeValues.freedom, 1500);
+  animateGauge('fill-equality', startValues.equality, cumulativeValues.equality, 1500);
+  animateGauge('fill-safety', startValues.safety, cumulativeValues.safety, 1500);
+  animateGauge('fill-finance', startValues.finance, cumulativeValues.finance, 1500);
+});
 
     // 선택지 클릭 시 실행
     async function saveChoice(option) {
@@ -414,5 +454,4 @@
     }
   </script>
 </body>
-
 </html>
