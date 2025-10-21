@@ -27,5 +27,24 @@ img {
 
 }
 
+/* 가로 모드 (landscape) 전체 페이지 축소 */
+@media (max-height: 600px) and (orientation: landscape) {
+  body {
+    transform: scale(0.8);
+    transform-origin: center center;
+  }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  body {
+    transform: scale(0.7);
+    transform-origin: center center;
+  }
+}
+@media (max-height: 400px) and (orientation: landscape) {
+  body {
+    transform: scale(0.6);
+    transform-origin: center center;
+  }
+}
 
 
