@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="styles.css">
   <style>
     /* --- 기본 스타일 --- */
-    html, body { height:100%; margin:0; }
     body{
       height:100vh;
       background: linear-gradient(to bottom, #0a0a0f, #1a1a2e);
@@ -36,17 +35,32 @@
     @keyframes fogMove { from{background-position:0 0;} to{background-position:2000px 0;} }
 
     /* 컨테이너 */
-    .wrap{
-      width:100%;
-      max-width:1100px;
-      z-index:1;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:14px; /* 전체 요소 간 기본 간격 줄임 */
-      padding:40px 16px; /* 위아래 여백 적당히 유지 */
-      box-sizing:border-box;
-    }
+.wrap{
+  width:100%;
+  max-width:1100px;
+  max-height:95vh;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  padding:40px 16px;
+  box-sizing:border-box;
+  transform-origin:center center;
+}
+
+/* 화면 높이에 맞게 자동 축소 */
+@media (max-height: 850px) {
+  .wrap { transform: scale(0.97); }
+}
+@media (max-height: 750px) {
+  .wrap { transform: scale(0.93); }
+}
+@media (max-height: 650px) {
+  .wrap { transform: scale(0.88); }
+}
+
 
     /* 사진 (조금 더 크게 조정) */
     .speech-img {
@@ -126,3 +140,4 @@
   </div>
 </body>
 </html>
+
